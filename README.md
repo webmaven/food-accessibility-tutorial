@@ -7,7 +7,7 @@ This tutorial is meant to follow the 'Guided Tour of Albuquerque’s Open Data.'
 <h2>Project Variations:</h2>
 If you aren't interested in food accessibility and grocery stores, you can either pick a different  business category or you can use your own point data (in geojson form).  Likewise, if you aren't interested in poverty, you can select your own variable from the CitySDK data.  Lastly, this project isn't specific to Albuquerque, you can use data from anywhere!</p>
 
-<h2>Workshop breakdown:</h2>
+<h2>Tutorial breakdown:</h2>
 We'll complete this through 6 activities:
 <ul>
 <li>Activity 0 - (see below) Download project folder from Github
