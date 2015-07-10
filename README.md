@@ -1,6 +1,6 @@
 <h1>ABQ Food Accessibility Tutorial</h1>
 
-This tutorial is meant to follow the 'Guided Tour of Albuquerque’s Open Data.'  Missed the presentation? No problem.  <a href="">We got you.</a>
+This tutorial is meant to follow the <a href="http://abqwebgeeks.org/webgeek-event/guided-tour-abq-open-data">Guided Tour of Albuquerque’s Open Data</a> presentation.  Missed the presentation? No problem.  <a href="">We got you.</a>
 
 <p>In this tutorial we are going to be doing a comparison of food accessibility in low and high poverty neighborhoods.  We'll do this by by mapping out and performing analysis on point data (grocery stores from CABQ Open Data) and polygon data (poverty rates from CitySDK data).
 
@@ -19,7 +19,7 @@ We'll complete this through 6 activities:
 </ul>
 
 <h2>Assumptions I'm making about you:</h2>
-<li>you have read/write access to a web server (maybe you don't actually need this?)
+<li>you have read/write access to a web server 
 <li>you have access to a text editor
 <li>you know how to store javascript in a separate file rather in your header/body tags (or excited about learning)
 <li>you feel ok with jquery (or excited about learning)
