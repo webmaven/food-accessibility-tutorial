@@ -1,4 +1,4 @@
-// Activity #4
+// Activity #5
 
 $(document).ready(function() {
 
@@ -41,7 +41,18 @@ $(document).ready(function() {
 		// Activity 3 - see the alternate_citysdk_ajax _call.js for the request used to grab the census.geojson data below
 
 
-	var threshold = 0.25;	//activity 4
+	var threshold = 0.40;	//activity 4
+
+	var abovePointCount = 0;  //activity 5
+	var abovePolygonCount = 0; //activity 5
+	var belowPointCount = 0;  //activity 5
+	var belowPolygonCount = 0; //activity 5
+
+	var avgAbove = 0; //activity 5
+	var avgBelow = 0; //activity 5
+
+	var percentAbove = 0; //activity 5
+	var percentBelow = 0; //activity 5
 
 	var url = "data/census.geojson";
 	
@@ -50,30 +61,45 @@ $(document).ready(function() {
 	    dataType: 'json',
 	    success: function (data) {
 	    	blockCount = data.features.length;
-	    	geojson = new L.GeoJSON(data, {
+	    	count = turf.count(data, groceryGeoJson, 'pt_count'); //activity 5: count the number of grocery stores and add as an attribute to blocks
+	    	filtered = turf.remove(count, 'pt_count', 0);  //activity 5: get rid of all blocks that dont have a grocery store in them
+	    	geojson = new L.GeoJSON(filtered, {
 
 	    	/////// Activity 4 - add the style	element
 	    		style: function (feature) {
-		  		if ((feature.properties.poverty)/(feature.properties.population) > threshold) {
+		  			if ((feature.properties.poverty)/(feature.properties.population) > threshold) {
+		  				abovePolygonCount = abovePolygonCount  + 1; //activity 5
+		  				abovePointCount = abovePointCount + feature.properties.pt_count; //activity 5
 		  				return {color: 'red'};
 		  		}
 		  		else {
+		  			belowPolygonCount = belowPolygonCount  + 1; //activity 5
+		  			belowPointCount = belowPointCount + feature.properties.pt_count; //activity 5
 		  			return {color: 'green'};
 		  			
 		  		}
         
     	},
-
     	////////
 	    		onEachFeature: function(feature, layer){
 	    			layer.bindPopup("poverty: " + Math.floor(100*parseInt(feature.properties.poverty)/(feature.properties.population)) + "%");
 
-
 	    		}
 	    	});
-
 	    	geojson.addTo(map);
-	
+	    	
+	    	//Activity 5 - Calculate the average number of points (grocery stores) in each of the block group categories (above, below threshold)
+	    	avgAbove = Math.round(abovePointCount/abovePolygonCount);
+	    	avgBelow = Math.round(belowPointCount/belowPolygonCount);
+
+	    	//Activity 5 - Calculate the percent of grocery stores in each of the block group categories (above, below threshold)
+	    	percentAbove = Math.floor(100*abovePointCount/(abovePointCount + belowPointCount));
+	    	percentBelow = Math.floor(100*belowPointCount/(abovePointCount + belowPointCount));
+
+
+	    	//activity 5: display results
+	      	$('#results').html("<ul><li>\"High poverty neighborhoods\" contain " + percentAbove + "% of ABQ's grocery stores and have an average of " + avgAbove + " stores in them</li><br><li>" + "\"Low poverty neighborhoods\" contain " + percentBelow + "% of ABQ's grocery stores and have an average of " + avgBelow + " stores in them.</li></ul>");
+
 	    }
 
 	    
