@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 		// Activity 3 - see the alternate_citysdk_ajax _call.js for the request used to grab the census.geojson data below
 
-	var url = "../../data/census.geojson";
+	var url = "data/census.geojson";
 	$.ajax({
 	    url: url,
 	    dataType: 'json',
