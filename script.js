@@ -11,25 +11,21 @@ $(document).ready(function() {
 	}).addTo(map);
 
 
-	var url = "data/retail_grocery.geojson";
-	$.ajax({
-	    url: url,
-	    dataType: 'json',
-	    success: function (data) {
-	    	groceryGeoJson = data;	    	
-	    	geojson = new L.GeoJSON(data, {
-	    		
-	    		onEachFeature: function(feature, layer){
-	    			layer.bindPopup(feature.properties.Name);
+    var url = "data/retail_grocery.geojson";
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        success: function (data) {
 
-	    		}
-	    	});
-	    	geojson.addTo(map);
-	      	
-	    }
+		geojson = new L.GeoJSON(data, {
 
-	    
-	});
+		onEachFeature: function(feature, layer){
+			layer.bindPopup("poverty: " + Math.floor(100*parseInt(feature.properties.poverty)/(feature.properties.population)) + "%");
+                }
+            });
+            geojson.addTo(map);
+
+        }
 
 
-});
+    });
